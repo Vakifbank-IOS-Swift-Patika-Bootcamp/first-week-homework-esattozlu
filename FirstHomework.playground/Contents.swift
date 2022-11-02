@@ -1,6 +1,6 @@
 import Foundation
 
-// #1
+// #1 Verilen Stringin palindrome olup olmadığını kontrol eden bir fonksiyon yazınız.
 func isPalindrome(string: String) -> Bool {
     var controlString = ""
     
@@ -18,7 +18,7 @@ func isPalindrome(string: String) -> Bool {
 print(isPalindrome(string: "RADAR"))
 print("----------------------------")
 
-// #2
+// #2 Verilen bir array içerisindeki her bir elemanın sayısını veren bir fonksiyon yazınız.
 func countArrayElement<T: Hashable>(array: [T]) {
     
     var elementCounts = [T: Int]()
@@ -38,7 +38,7 @@ countArrayElement(array: [1, 2, 3, 1, 5, 6, 7, 1, 8, 1, 2, 4, 2, 4, 5, 8, 7, 10]
 print("----------------------------")
 
 
-// #3
+// #3 "*" Karakterinden piramit oluşturan fonksiyonu yazınız. Parametre olarak kaç katlı olacağı alınsın.
 func createPyramid(numberOfFloor: Int) {
     
     var floorNumber = 1
@@ -56,7 +56,7 @@ createPyramid(numberOfFloor: 5)
 print("----------------------------")
 
 
-// #4
+// #4 Yazdığınız piramit fonksiyonun çıktısını ortalı olacak şekilde yazınız.
 func createCenterAlignedPyramid(numberOfFloor: Int) {
     
     var floorNumber = 1
@@ -123,33 +123,26 @@ print("----------------------------")
 // The prime factors of 13195 are 5, 7, 13 and 29. What is the largest prime factor of the number 600851475143 ?
 
 
-func primes(n: Int) -> [Int] {
-    var numbers = [Int](2 ..< n)
-    for i in 0..<n - 2 {
-        let prime = numbers[i]
-        guard prime > 0 else { continue }
-        for multiple in stride(from: 2 * prime - 2, to: n - 2, by: prime){
-            numbers[multiple] = 0
-        }
-    }
-    return numbers.filter{ $0 > 0 }
+func largestPrimeFactor(number: Int) -> Int {
+    var number = number
+    var factors: [Int] = []
 
+    var divisor = 2
+    
+    // kendi karesinden küçük sayılar kendinden küçük diğer asal sayılarla türetilebildiği için divisor * divisor <= n kontrolü yapıyoruz
+    while divisor * divisor <= number {
+        while number % divisor == 0 {
+            factors.append(divisor)
+            number /= divisor
+        }
+        divisor += divisor == 2 ? 1 : 2
+    }
+    if number > 1 {
+        factors.append(number)
+    }
+    guard let largestPrime = factors.max() else { return 0 }
+    return largestPrime
 }
 
-func largestPrimeFactor(number: Int) -> Int{
-    var largestNumber = 1
-    var primeArray = primes(n: number)
-    
-    for prime in primeArray {
-        if number % prime == 0 {
-            largestNumber = prime
-        }
-    }
-    
-    return largestNumber
-}
-
-print(primes(n: 600851475143))
-
-
+print(largestPrimeFactor(number: 600851475143))
 
