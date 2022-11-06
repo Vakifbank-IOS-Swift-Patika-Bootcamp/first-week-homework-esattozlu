@@ -29,12 +29,12 @@ print("----------------------------")
 
 
 // #2 Verilen bir array içerisindeki her bir elemanın sayısını veren bir fonksiyon yazınız.
-func countArrayElement<T: Hashable>(array: [T]) {
-    
-    var elementCounts = [T: Int]()
+func countArrayElement<T: Any>(array: [T]) {
+    let mappedString = array.map{ String(describing: $0)}
+    var elementCounts = [String: Int]()
     
     //input array içerisindeki elementlerleri dictionary'ye atar. Eğer daha önce atanmışsa değerini alır atanmamış(nil) ise 0 verir ve her saydığında 1 ekler.
-    for element in array {
+    for element in mappedString {
         elementCounts[element] = (elementCounts[element] ?? 0) + 1
     }
     
@@ -43,13 +43,11 @@ func countArrayElement<T: Hashable>(array: [T]) {
     }
 }
 
-countArrayElement(array: ["red", "red", "yellow", "blue", "green", "blue", "purple", "red"])
+countArrayElement(array: ["red", "red", "yellow", 1, 1, 2, true, true, false, 7.2, 7.2, 3.5])
 print("----------------------------")
-countArrayElement(array: [1, 2, 3, 1, 5, 1, 1, 2, 4, 2, 4, 5])
+countArrayElement(array: ["red", "red", "yellow", "blue", "green", "blue"])
 print("----------------------------")
-countArrayElement(array: [true, true, false, true])
-print("----------------------------")
-countArrayElement(array: [2.0, 2.0, 6.4, 7.2])
+countArrayElement(array: [1, 2, 3, 1 , 1, 2, 4, 2, 4])
 print("----------------------------")
 
 
@@ -137,7 +135,7 @@ func fibonacciEvenSum(below: Int) -> Int {
     return sum
 }
 
-print(fibonacciEvenSum(below: 4000000))
+print(fibonacciEvenSum(below: 4_000_000))
 print("----------------------------")
 
 
