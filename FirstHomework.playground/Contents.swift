@@ -3,8 +3,8 @@ import Foundation
 // #1 Verilen Stringin palindrome olup olmadığını kontrol eden bir fonksiyon yazınız.
 func isPalindrome(string: String) -> Bool {
     
-    //String içindeki boşlukları siler ve case insensitive yapabilmek için gelen stringi lowercased yapar
-    var inputString = string.filter{!$0.isWhitespace}.lowercased()
+    //String içindeki noktalama işaretlerini ve boşlukları siler ve case insensitive yapabilmek için gelen stringi lowercased yapar
+    var inputString = string.filter{!$0.isWhitespace}.lowercased().components(separatedBy: .punctuationCharacters).joined()
     var controlString = ""
     
     for character in inputString {
@@ -23,7 +23,8 @@ func isPalindrome(string: String) -> Bool {
 
 print(isPalindrome(string: "RADAR"))
 print(isPalindrome(string: "Sir I demand I am a maid named Iris"))
-print(isPalindrome(string: "Dennis and Edna sinned"))
+print(isPalindrome(string: "Did Hannah see bees? Hannah did."))
+print(isPalindrome(string: "Eva, can I see bees in a cave?"))
 print("----------------------------")
 
 
@@ -47,6 +48,8 @@ print("----------------------------")
 countArrayElement(array: [1, 2, 3, 1, 5, 1, 1, 2, 4, 2, 4, 5])
 print("----------------------------")
 countArrayElement(array: [true, true, false, true])
+print("----------------------------")
+countArrayElement(array: [2.0, 2.0, 6.4, 7.2])
 print("----------------------------")
 
 
